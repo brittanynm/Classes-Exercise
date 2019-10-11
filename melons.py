@@ -9,6 +9,9 @@ class AbstractMelonOrder():
         self.shipped = False
         self.order_type = country_type
         self.tax = tax
+        #Throw melon error
+        if qty > 100:
+            raise TooManyMelonsError('No more than 100 melons!')
 
     def mark_shipped(self):
         """Record the fact than an order has been shipped."""
@@ -74,3 +77,8 @@ class GovernmentMelonOrder(AbstractMelonOrder):
     def mark_inspection(passed):
         if passed:
             self.passed_inspection = True
+
+class TooManyMelonsError(ValueError):
+    __module__ = ''
+
+toomanymelons = many_melons = DomesticMelonOrder('cantaloupe', 101)
